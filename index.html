@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekip Başvuru Portalı</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #0f1015;
+            color: #e1e1e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background-color: #161821;
+            border: 1px solid #232634;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-size: 24px;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #8f9ba8;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #a0aec0;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: #0b0c10;
+            border: 1px solid #2d3748;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #4f46e5;
+        }
+        .hidden {
+            display: none;
+        }
+        .success-message {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .success-message h2 {
+            color: #10b981;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="form-container">
+        <h1>Ekip Başvuru Portalı</h1>
+        <p class="subtitle">Kanallarımız için yeni yetenekler arıyoruz. Formu eksiksiz doldurun.</p>
+        
+        <form id="applicationForm">
+            <div class="form-group">
+                <label for="name">Ad / Soyad veya Lakap</label>
+                <input type="text" id="name" required placeholder="Örn: Ahmet / Lias">
+            </div>
+
+            <div class="form-group">
+                <label for="discord">Discord Kullanıcı Adı</label>
+                <input type="text" id="discord" required placeholder="Örn: kullaniciadi#0000 veya @kullaniciadi">
+            </div>
+
+            <div class="form-group">
+                <label for="role">Başvurulacak Pozisyon</label>
+                <select id="role" required>
+                    <option value="" disabled selected>Pozisyon Seçin</option>
+                    <option value="İçerik & Konuk">İçerik & Konuk Adayı</option>
+                    <option value="Discord Moderatör">Discord Operasyon / Moderatör</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Deneyim / Ekipman / Kendinizden Bahsedin</label>
+                <textarea id="experience" required placeholder="Mikrofon modeliniz, daha önceki deneyimleriniz veya neden bu ekipte olmalısınız?"></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn">Başvuruyu Gönder</button>
+        </form>
+    </div>
+
+    <div id="success-container" class="hidden success-message">
+        <h2>Başvurunuz Alındı!</h2>
+        <p>Bilgileriniz ekibe iletildi. Uygun görülmesi durumunda Discord üzerinden sizinle iletişime geçilecektir.</p>
+    </div>
+</div>
+
+<script>
+    const WEBHOOK_URL = "https://discord.com/api/webhooks/1564636273400877076/lSneHXavPP6IKRXz7dxhTWTcYtt0dx5HjTqK9AZP7tK5YRtyQBwj7abuiHtlqxiUBuO7"; // Discord kanalından alacağın Webhook URL'sini buraya yapıştır.
+
+    document.getElementById('applicationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.textContent = "Gönderiliyor...";
+
+        const name = document.getElementById('name').value;
+        const discord = document.getElementById('discord').value;
+        const role = document.getElementById('role').value;
+        const experience = document.getElementById('experience').value;
+
+        const payload = {
+            embeds: [{
+                title: "🚨 Yeni Ekip Başvurusu Geldi!",
+                color: 65280,
+                fields: [
+                    { name: "👤 İsim / Lakap", value: name, inline: true },
+                    { name: "💬 Discord", value: discord, inline: true },
+                    { name: "📌 Pozisyon", value: role, inline: false },
+                    { name: "📝 Detaylar / Deneyim", value: experience, inline: false }
+                ],
+                timestamp: new Date().toISOString()
+            }]
+        };
+
+        fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (response.ok) {
+                document.getElementById('form-container').classList.add('hidden');
+                document.getElementById('success-container').classList.remove('hidden');
+            } else {
+                alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+                btn.disabled = false;
+                btn.textContent = "Başvuruyu Gönder";
+            }
+        })
+        .catch(error => {
+            console.error('Hata:', error);
+            alert('Bağlantı hatası oluştu.');
+            btn.disabled = false;
+            btn.textContent = "Başvuruyu Gönder";
+        });
+    });
+</script>
+
+</body>
+</html>
