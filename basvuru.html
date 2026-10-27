@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekip Başvuru Portalı — werzeq</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: #0b0d12; color: #e2e8f0; min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 10%; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .logo { font-size: 22px; font-weight: 700; color: #ffffff; text-decoration: none; }
+        .back-home { color: #94a3b8; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .back-home:hover { color: #fff; }
+        .apply-container { max-width: 700px; width: 90%; margin: 40px auto; padding: 40px; background: #111827; border: 1px solid #1f2937; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .section-tag { color: #6366f1; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 5px; text-align: center; }
+        .section-title { font-size: 28px; color: #ffffff; margin-bottom: 25px; text-align: center; }
+        .form-group { margin-bottom: 20px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; color: #9ca3af; font-weight: 500; }
+        input, select, textarea { width: 100%; padding: 12px 16px; background: #0b0d12; border: 1px solid #1f2937; border-radius: 8px; color: #ffffff; font-size: 14px; outline: none; transition: border-color 0.2s; }
+        input:focus, select:focus, textarea:focus { border-color: #6366f1; }
+        textarea { resize: vertical; min-height: 100px; }
+        .btn-submit { width: 100%; padding: 14px; background: #6366f1; color: #ffffff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
+        .btn-submit:hover { background: #4f46e5; }
+        .success-box { text-align: center; padding: 40px 0; }
+        .hidden { display: none; }
+        footer { text-align: center; padding: 30px; color: #64748b; font-size: 13px; border-top: 1px solid #1f2937; }
+        @media(max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">werzeq</a>
+        <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Anasayfaya Dön</a>
+    </nav>
+
+    <div class="apply-container">
+        <div class="section-tag">EKİP KADROSU</div>
+        <h1 class="section-title">Başvuru Formu</h1>
+
+        <div id="form-wrapper">
+            <form id="applicationForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Adınız / Soyadınız</label>
+                        <input type="text" id="name" required placeholder="Örn: Ahmet Yılmaz">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Yaşınız</label>
+                        <input type="number" id="age" required min="12" max="99" placeholder="Örn: 18">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="discord">Discord Kullanıcı Adınız</label>
+                    <input type="text" id="discord" required placeholder="Örn: werzeqback">
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Başvurmak İstediğiniz Pozisyon</label>
+                    <select id="role" required>
+                        <option value="" disabled selected>Pozisyon Seçin</option>
+                        <option value="İçerik Üreticisi & Konuk">İçerik Üreticisi & Konuk (Olgun Ses / Yüksek Enerji)</option>
+                        <option value="Discord Moderatör & Operasyon">Discord Moderatör / Ticket & Sponsorluk</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="equipment">Mikrofon / Donanım Kaliteniz</label>
+                    <input type="text" id="equipment" required placeholder="Örn: HyperX QuadCast, dip ses yok.">
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Deneyiminiz ve Neden Sizi Seçmeliyiz?</label>
+                    <textarea id="experience" required placeholder="Daha önceki projeleriniz, aktiflik süreniz, yeteneklerinizden kısaca bahsedin..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">Başvuruyu Gönder</button>
+            </form>
+        </div>
+
+        <div id="success-wrapper" class="success-box hidden">
+            <i class="fas fa-check-circle fa-4x" style="color: #10b981; margin-bottom: 20px;"></i>
+            <h2 style="color: #fff; margin-bottom: 10px;">Başvurunuz Başarıyla İletildi!</h2>
+            <p style="color: #9ca3af; margin-bottom: 25px;">Bilgileriniz Discord yönetim kanalımıza düştü. Uygun görüldüğü takdirde sizinle iletişime geçilecektir.</p>
+            <a href="index.html" class="btn-submit" style="display:inline-block; text-decoration:none; width:auto; padding: 10px 25px;">Anasayfaya Dön</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 werzeq. Tüm hakları saklıdır.
+    </footer>
+
+    <script>
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1564636273400877076/lSneHXavPP6IKRXz7dxhTWTcYtt0dx5HjTqK9AZP7tK5YRtyQBwj7abuiHtlqxiUBuO7";
+
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = "Gönderiliyor...";
+
+            const payload = {
+                embeds: [{
+                    title: "🚨 Yeni Ekip Başvurusu Geldi!",
+                    color: 65280,
+                    fields: [
+                        { name: "👤 Ad Soyad", value: document.getElementById('name').value, inline: true },
+                        { name: "🎂 Yaş", value: document.getElementById('age').value, inline: true },
+                        { name: "💬 Discord", value: document.getElementById('discord').value, inline: false },
+                        { name: "📌 Pozisyon", value: document.getElementById('role').value, inline: false },
+                        { name: "🎙️ Ekipman", value: document.getElementById('equipment').value, inline: false },
+                        { name: "📝 Deneyim / Detaylar", value: document.getElementById('experience').value, inline: false }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if(res.ok) {
+                    document.getElementById('form-wrapper').classList.add('hidden');
+                    document.getElementById('success-wrapper').classList.remove('hidden');
+                } else {
+                    alert('Bir hata oluştu, lütfen tekrar deneyin.');
+                    btn.disabled = false;
+                    btn.textContent = "Başvuruyu Gönder";
+                }
+            })
+            .catch(() => {
+                alert('Bağlantı hatası.');
+                btn.disabled = false;
+                btn.textContent = "Başvuruyu Gönder";
+            });
+        });
+    </script>
+</body>
+</html>
