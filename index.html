@@ -3,194 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ekip Başvuru Portalı</title>
+    <title>werzeq — Portfolio & Başvuru</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            scroll-behavior: smooth;
         }
+
         body {
-            background-color: #0f1015;
-            color: #e1e1e6;
+            background-color: #0b0d12;
+            color: #e2e8f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            min-height: 100vh;
+            padding: 25px 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 70vh;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .hero-text p {
+            color: #94a3b8;
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: #1e293b;
+            color: #6366f1;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.2s;
+        }
+
+        .social-icons a:hover {
+            background: #6366f1;
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+
+        .hero-avatar {
+            position: relative;
+        }
+
+        .hero-avatar img {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1e293b;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            color: #6366f1;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: #ffffff;
+            margin-bottom: 40px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #374151;
+        }
+
+        .card-img {
+            height: 160px;
+            background: #1f2937;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #e5e7eb;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-body {
             padding: 20px;
         }
-        .container {
-            background-color: #161821;
-            border: 1px solid #232634;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 600px;
-            padding: 40px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 10px;
+
+        .card-body h3 {
             color: #ffffff;
-            font-size: 24px;
+            font-size: 18px;
+            margin-bottom: 6px;
         }
-        p.subtitle {
-            text-align: center;
-            color: #8f9ba8;
-            margin-bottom: 30px;
+
+        .card-body p {
+            color: #9ca3af;
             font-size: 14px;
         }
+
+        /* Apply / Form Section */
+        .apply-section {
+            padding: 80px 10%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
-        label {
+
+        .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
             font-size: 14px;
-            color: #a0aec0;
+            color: #9ca3af;
+            font-weight: 500;
         }
-        input, select, textarea {
+
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 12px;
-            background-color: #0b0c10;
-            border: 1px solid #2d3748;
-            border-radius: 6px;
-            color: #fff;
+            padding: 12px 16px;
+            background: #0b0d12;
+            border: 1px solid #1f2937;
+            border-radius: 8px;
+            color: #ffffff;
             font-size: 14px;
+            outline: none;
             transition: border-color 0.2s;
         }
-        input:focus, select:focus, textarea:focus {
-            outline: none;
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             border-color: #6366f1;
         }
-        textarea {
+
+        .form-group textarea {
             resize: vertical;
-            height: 100px;
+            min-height: 110px;
         }
-        button {
+
+        .btn-submit {
             width: 100%;
             padding: 14px;
-            background-color: #6366f1;
-            color: white;
+            background: #6366f1;
+            color: #ffffff;
             border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background 0.2s;
         }
-        button:hover {
-            background-color: #4f46e5;
+
+        .btn-submit:hover {
+            background: #4f46e5;
         }
-        .hidden {
-            display: none;
+
+        /* Contact Section */
+        .contact-footer {
+            padding: 60px 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #1f2937;
         }
-        .success-message {
-            text-align: center;
-            padding: 40px 0;
+
+        .contact-btn {
+            background: #818cf8;
+            color: #0f172a;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: opacity 0.2s;
         }
-        .success-message h2 {
-            color: #10b981;
-            margin-bottom: 10px;
+
+        .contact-btn:hover {
+            opacity: 0.9;
+        }
+
+        .hidden { display: none; }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 40px;
+            }
+            .nav-links { gap: 15px; }
+            .social-icons { justify-content: center; }
+            .contact-footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div id="form-container">
-        <h1>Ekip Başvuru Portalı</h1>
-        <p class="subtitle">Kanallarımız için yeni yetenekler arıyoruz. Formu eksiksiz doldurun.</p>
-        
-        <form id="applicationForm">
-            <div class="form-group">
-                <label for="name">Ad / Soyad veya Lakap</label>
-                <input type="text" id="name" required placeholder="Örn: Ahmet / Lias">
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">werzeq</div>
+        <ul class="nav-links">
+            <li><a href="#home">Anasayfa</a></li>
+            <li><a href="#projects">Projeler</a></li>
+            <li><a href="#basvuru">Başvuru</a></li>
+            <li><a href="#contact">İletişim</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <h1>werzeq</h1>
+            <p>Geliştirici ve İçerik Üreticisi.</p>
+            <div class="social-icons">
+                <a href="https://discord.gg/XtH7gwUUaq" target="_blank" title="Discord Sunucusu"><i class="fab fa-discord"></i></a>
+                <a href="#" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
             </div>
+        </div>
+        <div class="hero-avatar">
+            <img id="discord-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="werzeq Avatar">
+        </div>
+    </section>
 
-            <div class="form-group">
-                <label for="discord">Discord Kullanıcı Adı</label>
-                <input type="text" id="discord" required placeholder="Örn: kullaniciadi#0000 veya @kullaniciadi">
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="section-tag">PROJELER</div>
+        <h2 class="section-title">Çalışmalarım</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="card-img">
+                    <i class="fas fa-cubes fa-3x" style="color: #6366f1;"></i>
+                    <span class="card-badge">KURUCU</span>
+                </div>
+                <div class="card-body">
+                    <h3>CraftLias</h3>
+                    <p>Minecraft sunucusu ve özel topluluk altyapısı.</p>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="role">Başvurulacak Pozisyon</label>
-                <select id="role" required>
-                    <option value="" disabled selected>Pozisyon Seçin</option>
-                    <option value="İçerik & Konuk">İçerik & Konuk Adayı</option>
-                    <option value="Discord Moderatör">Discord Operasyon / Moderatör</option>
-                </select>
+            <div class="project-card">
+                <div class="card-img">
+                    <i class="fas fa-code fa-3x" style="color: #10b981;"></i>
+                    <span class="card-badge">GELİŞTİRİCİ</span>
+                </div>
+                <div class="card-body">
+                    <h3>Özel Eklentiler</h3>
+                    <p>Minecraft ve Discord bot sistemleri eklentileri.</p>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="experience">Deneyim / Ekipman / Kendinizden Bahsedin</label>
-                <textarea id="experience" required placeholder="Mikrofon modeliniz, daha önceki deneyimleriniz veya neden bu ekipte olmalısınız?"></textarea>
+            <div class="project-card">
+                <div class="card-img">
+                    <i class="fab fa-youtube fa-3x" style="color: #ef4444;"></i>
+                    <span class="card-badge">YAYINCI</span>
+                </div>
+                <div class="card-body">
+                    <h3>İçerik Üretimi</h3>
+                    <p>YouTube & TikTok özel içerik ve topluluk videoları.</p>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <button type="submit" id="submitBtn">Başvuruyu Gönder</button>
-        </form>
-    </div>
-
-    <div id="success-container" class="hidden success-message">
-        <h2>Başvurunuz Alındı!</h2>
-        <p>Bilgileriniz ekibe iletildi. Uygun görülmesi durumunda Discord üzerinden sizinle iletişime geçilecektir.</p>
-    </div>
-</div>
-
-<script>
-    const WEBHOOK_URL = "https://discord.com/api/webhooks/1564636273400877076/lSneHXavPP6IKRXz7dxhTWTcYtt0dx5HjTqK9AZP7tK5YRtyQBwj7abuiHtlqxiUBuO7"; // Discord kanalından alacağın Webhook URL'sini buraya yapıştır.
-
-    document.getElementById('applicationForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const btn = document.getElementById('submitBtn');
-        btn.disabled = true;
-        btn.textContent = "Gönderiliyor...";
-
-        const name = document.getElementById('name').value;
-        const discord = document.getElementById('discord').value;
-        const role = document.getElementById('role').value;
-        const experience = document.getElementById('experience').value;
-
-        const payload = {
-            embeds: [{
-                title: "🚨 Yeni Ekip Başvurusu Geldi!",
-                color: 65280,
-                fields: [
-                    { name: "👤 İsim / Lakap", value: name, inline: true },
-                    { name: "💬 Discord", value: discord, inline: true },
-                    { name: "📌 Pozisyon", value: role, inline: false },
-                    { name: "📝 Detaylar / Deneyim", value: experience, inline: false }
-                ],
-                timestamp: new Date().toISOString()
-            }]
-        };
-
-        fetch(WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        })
-        .then(response => {
-            if (response.ok) {
-                document.getElementById('form-container').classList.add('hidden');
-                document.getElementById('success-container').classList.remove('hidden');
-            } else {
-                alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
-                btn.disabled = false;
-                btn.textContent = "Başvuruyu Gönder";
-            }
-        })
-        .catch(error => {
-            console.error('Hata:', error);
-            alert('Bağlantı hatası oluştu.');
-            btn.disabled = false;
-            btn.textContent = "Başvuruyu Gönder";
-        });
-    });
-</script>
-
-</body>
-</html>
+    <!-- Application Form Section -->
+    <section class="apply-section" id="basvuru">
+        <div class="section-tag" style="text-align: center;">EKİBE KATIL</div>
